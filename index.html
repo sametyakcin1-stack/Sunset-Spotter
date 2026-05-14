@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sunset Spotter</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background: linear-gradient(135deg,#1e1e2f,#ff7b54);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      color:white;
+    }
+
+    .container{
+      width:100%;
+      max-width:600px;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius:20px;
+      padding:30px;
+      box-shadow:0 0 20px rgba(0,0,0,0.3);
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:10px;
+      font-size:40px;
+    }
+
+    p{
+      text-align:center;
+      margin-bottom:25px;
+      opacity:0.9;
+    }
+
+    .question{
+      margin-bottom:20px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:bold;
+    }
+
+    select{
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:12px;
+      background:#ffb347;
+      color:#222;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      margin-top:10px;
+    }
+
+    button:hover{
+      background:white;
+      transform:scale(1.03);
+    }
+
+    .result{
+      margin-top:25px;
+      padding:20px;
+      border-radius:15px;
+      background:rgba(0,0,0,0.25);
+      text-align:center;
+      font-size:20px;
+      display:none;
+    }
+
+    .emoji{
+      font-size:40px;
+      margin-bottom:10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>🌇 Sunset Spotter</h1>
+
+    <p>
+      Find the best sunset and chill spot in İzmir!
+    </p>
+
+    <div class="question">
+      <label>Weather</label>
+      <select id="weather">
+        <option>Sunny</option>
+        <option>Rainy</option>
+        <option>Windy</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Time</label>
+      <select id="time">
+        <option>Morning</option>
+        <option>Afternoon</option>
+        <option>Evening</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Transportation</label>
+      <select id="transport">
+        <option>Walking</option>
+        <option>Public Transport</option>
+        <option>Car</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Season</label>
+      <select id="season">
+        <option>Summer</option>
+        <option>Winter</option>
+        <option>Spring</option>
+        <option>Autumn</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <label>Current Area</label>
+      <select id="place">
+        <option>Bornova</option>
+        <option>Karşıyaka</option>
+        <option>Alsancak</option>
+        <option>Buca</option>
+      </select>
+    </div>
+
+    <button onclick="findSpot()">
+      Find My Spot
+    </button>
+
+    <div class="result" id="result"></div>
+
+  </div>
+
+  <script>
+
+    function findSpot(){
+
+      let weather = document.getElementById("weather").value;
+      let time = document.getElementById("time").value;
+      let transport = document.getElementById("transport").value;
+      let season = document.getElementById("season").value;
+      let place = document.getElementById("place").value;
+
+      let resultText = "";
+      let emoji = "";
+
+      if(weather === "Sunny" && time === "Evening"){
+        resultText = "Go to Kordon and enjoy the sunset!";
+        emoji = "🌅";
+      }
+
+      else if(weather === "Rainy" && season === "Winter"){
+        resultText = "Visit a cozy indoor cafe in Alsancak!";
+        emoji = "☕";
+      }
+
+      else if(transport === "Car" && season === "Summer"){
+        resultText = "Drive to İnciraltı Coast!";
+        emoji = "🚗";
+      }
+
+      else if(place === "Karşıyaka" && transport === "Walking"){
+        resultText = "Walk through Bostanlı Sunset Area!";
+        emoji = "🚶";
+      }
+
+      else if(weather === "Windy" && time === "Evening"){
+        resultText = "Stay home and watch sunset videos!";
+        emoji = "🎮";
+      }
+
+      else{
+        resultText = "Explore a new place in İzmir today!";
+        emoji = "✨";
+      }
+
+      let resultBox = document.getElementById("result");
+
+      resultBox.style.display = "block";
+
+      resultBox.innerHTML = `
+        <div class="emoji">${emoji}</div>
+        <div>${resultText}</div>
+      `;
+    }
+
+  </script>
+
+</body>
+</html>
