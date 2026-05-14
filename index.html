@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Sunset Spotter</title>
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
-    }
 
     body{
-      min-height:100vh;
-      background: linear-gradient(135deg,#1e1e2f,#ff7b54);
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(to bottom right,#1e1e2f,#ff9966);
+      color:white;
       display:flex;
       justify-content:center;
       align-items:center;
+      min-height:100vh;
       padding:20px;
-      color:white;
     }
 
-    .container{
+    .app{
       width:100%;
       max-width:600px;
       background:rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius:20px;
       padding:30px;
+      border-radius:20px;
+      backdrop-filter:blur(10px);
       box-shadow:0 0 20px rgba(0,0,0,0.3);
     }
 
     h1{
       text-align:center;
       margin-bottom:10px;
-      font-size:40px;
     }
 
     p{
       text-align:center;
       margin-bottom:25px;
-      opacity:0.9;
     }
 
     .question{
@@ -68,105 +63,101 @@
       padding:15px;
       border:none;
       border-radius:12px;
-      background:#ffb347;
-      color:#222;
+      background:#ffd166;
       font-size:18px;
       font-weight:bold;
       cursor:pointer;
-      transition:0.3s;
       margin-top:10px;
     }
 
     button:hover{
       background:white;
-      transform:scale(1.03);
     }
 
-    .result{
+    #result{
       margin-top:25px;
       padding:20px;
       border-radius:15px;
       background:rgba(0,0,0,0.25);
-      text-align:center;
-      font-size:20px;
       display:none;
-    }
-
-    .emoji{
-      font-size:40px;
-      margin-bottom:10px;
+      text-align:center;
+      font-size:22px;
     }
 
   </style>
 </head>
+
 <body>
 
-  <div class="container">
+  <div class="app">
 
     <h1>🌇 Sunset Spotter</h1>
 
-    <p>
-      Find the best sunset and chill spot in İzmir!
-    </p>
+    <p>Find the best sunset location in İzmir!</p>
 
     <div class="question">
       <label>Weather</label>
+
       <select id="weather">
-        <option>Sunny</option>
-        <option>Rainy</option>
-        <option>Windy</option>
+        <option value="Sunny">Sunny</option>
+        <option value="Rainy">Rainy</option>
+        <option value="Windy">Windy</option>
       </select>
     </div>
 
     <div class="question">
       <label>Time</label>
+
       <select id="time">
-        <option>Morning</option>
-        <option>Afternoon</option>
-        <option>Evening</option>
+        <option value="Morning">Morning</option>
+        <option value="Afternoon">Afternoon</option>
+        <option value="Evening">Evening</option>
       </select>
     </div>
 
     <div class="question">
       <label>Transportation</label>
+
       <select id="transport">
-        <option>Walking</option>
-        <option>Public Transport</option>
-        <option>Car</option>
+        <option value="Walking">Walking</option>
+        <option value="Public">Public Transport</option>
+        <option value="Car">Car</option>
       </select>
     </div>
 
     <div class="question">
       <label>Season</label>
+
       <select id="season">
-        <option>Summer</option>
-        <option>Winter</option>
-        <option>Spring</option>
-        <option>Autumn</option>
+        <option value="Summer">Summer</option>
+        <option value="Winter">Winter</option>
+        <option value="Spring">Spring</option>
+        <option value="Autumn">Autumn</option>
       </select>
     </div>
 
     <div class="question">
-      <label>Current Area</label>
+      <label>Your Area</label>
+
       <select id="place">
-        <option>Bornova</option>
-        <option>Karşıyaka</option>
-        <option>Alsancak</option>
-        <option>Buca</option>
+        <option value="Bornova">Bornova</option>
+        <option value="Karşıyaka">Karşıyaka</option>
+        <option value="Alsancak">Alsancak</option>
+        <option value="Buca">Buca</option>
       </select>
     </div>
 
-    <button onclick="findSpot()">
+    <button onclick="showResult()">
       Find My Spot
     </button>
 
-    <div class="result" id="result"></div>
+    <div id="result"></div>
 
   </div>
 
   <script>
 
-    function findSpot(){
+    function showResult(){
 
       let weather = document.getElementById("weather").value;
       let time = document.getElementById("time").value;
@@ -174,47 +165,38 @@
       let season = document.getElementById("season").value;
       let place = document.getElementById("place").value;
 
-      let resultText = "";
-      let emoji = "";
+      let message = "";
 
       if(weather === "Sunny" && time === "Evening"){
-        resultText = "Go to Kordon and enjoy the sunset!";
-        emoji = "🌅";
+        message = "🌅 Go to Kordon for a perfect sunset!";
       }
 
-      else if(weather === "Rainy" && season === "Winter"){
-        resultText = "Visit a cozy indoor cafe in Alsancak!";
-        emoji = "☕";
+      else if(weather === "Rainy"){
+        message = "☕ Visit a cozy cafe in Alsancak!";
       }
 
       else if(transport === "Car" && season === "Summer"){
-        resultText = "Drive to İnciraltı Coast!";
-        emoji = "🚗";
+        message = "🚗 Drive to İnciraltı Coast!";
       }
 
-      else if(place === "Karşıyaka" && transport === "Walking"){
-        resultText = "Walk through Bostanlı Sunset Area!";
-        emoji = "🚶";
+      else if(place === "Karşıyaka"){
+        message = "🚶 Walk around Bostanlı Sunset Area!";
       }
 
-      else if(weather === "Windy" && time === "Evening"){
-        resultText = "Stay home and watch sunset videos!";
-        emoji = "🎮";
+      else if(weather === "Windy"){
+        message = "🎮 Stay home and watch sunset videos!";
       }
 
       else{
-        resultText = "Explore a new place in İzmir today!";
-        emoji = "✨";
+        message = "✨ Explore somewhere new in İzmir!";
       }
 
       let resultBox = document.getElementById("result");
 
       resultBox.style.display = "block";
 
-      resultBox.innerHTML = `
-        <div class="emoji">${emoji}</div>
-        <div>${resultText}</div>
-      `;
+      resultBox.innerHTML = message;
+
     }
 
   </script>
